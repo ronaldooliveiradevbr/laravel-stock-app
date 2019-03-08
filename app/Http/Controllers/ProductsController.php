@@ -8,11 +8,13 @@ class ProductsController extends Controller
 {
     public function list()
     {
-		$html = '<h1>Products</h1>';
-		$html .= '<br>Name: Fridge';
-		$html .= '<br>Name: Oven';
-		$html .= '<br>Name: Couch';
-		return $html;	
+		$products = [
+			['name' => 'Fridge'],
+			['name' => 'Oven'],
+			['name' => 'Couch'],
+		];
+
+        return view('products.list')->with('products', $products);
     }
 }
 
