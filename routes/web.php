@@ -1,5 +1,4 @@
 <?php
 
-Route::get('/', 'ProductsController@list');
-Route::get('/{product}', 'ProductsController@show');
+Route::resource('', 'ProductsController')->parameters(['' => 'product']);
 
