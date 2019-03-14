@@ -14,5 +14,5 @@
     <strong>Quantity in stock: </strong>{{ $product->quantity }}
   </li>
 </ul>
-@stop
+@endsection
 

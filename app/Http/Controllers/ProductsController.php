@@ -16,5 +16,10 @@ class ProductsController extends Controller
     {                         
         return view('products.show')->with('product', $product);
     }
+
+    public function create()
+    {
+        return view('products.create');
+    }
 }
 
