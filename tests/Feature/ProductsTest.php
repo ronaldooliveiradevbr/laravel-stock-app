@@ -15,7 +15,7 @@ class ProductsTest extends TestCase
         factory('Stock\Core\Product')->create(['name' => 'Microwave']);
         factory('Stock\Core\Product')->create(['name' => 'Tablet']);
 
-        $this->get('/')
+        $this->get('/products')
             ->assertStatus(200)
             ->assertSee('Products')
             ->assertSee('Smart TV')
@@ -27,7 +27,7 @@ class ProductsTest extends TestCase
     {
         $product = factory('Stock\Core\Product')->create();
 
-        $this->get('/1')
+        $this->get('/products/1')
             ->assertStatus(200)
             ->assertSee($product->name)
             ->assertSee($product->price);
@@ -44,7 +44,7 @@ class ProductsTest extends TestCase
             '<button type="submit',
 	];
 
-        $this->get('/create')
+        $this->get('/products/create')
             ->assertStatus(200)
             ->assertViewIs('products.create')
 	    ->assertSeeInOrder($formFields);

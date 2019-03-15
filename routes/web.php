@@ -1,4 +1,4 @@
 <?php
 
-Route::resource('', 'ProductsController')->parameters(['' => 'product']);
+Route::resource('products', 'ProductsController');
 
