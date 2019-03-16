@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Stock\Core\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductsTest extends TestCase
@@ -11,9 +12,9 @@ class ProductsTest extends TestCase
 
     public function test_a_user_should_see_a_list_of_products()
     {
-        factory('Stock\Core\Product')->create(['name' => 'Smart TV']);
-        factory('Stock\Core\Product')->create(['name' => 'Microwave']);
-        factory('Stock\Core\Product')->create(['name' => 'Tablet']);
+        factory(Product::class)->create(['name' => 'Smart TV']);
+        factory(Product::class)->create(['name' => 'Microwave']);
+        factory(Product::class)->create(['name' => 'Tablet']);
 
         $this->get('/products')
             ->assertStatus(200)
@@ -48,6 +49,16 @@ class ProductsTest extends TestCase
             ->assertStatus(200)
             ->assertViewIs('products.create')
 	    ->assertSeeInOrder($formFields);
+    }
+
+    public function test_a_user_can_add_new_product()
+    {
+        $data = factory(Product::class)->make()->toArray();
+
+	$this->post('/products', $data)
+            ->assertStatus(302)
+            ->assertSessionHas('message', "Product {$data['name']} added successfuly");
+        $this->assertDatabaseHas('products', $data);
     }
 }
 

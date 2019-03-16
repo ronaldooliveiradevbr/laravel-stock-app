@@ -21,5 +21,19 @@ class ProductsController extends Controller
     {
         return view('products.create');
     }
+
+    public function store(Request $request)
+    {
+	$data = $request->all();
+
+	Product::create($data);
+
+	$request->session()->flash(
+            'message',
+	    "Product {$data['name']} added successfuly"
+        );
+
+        return redirect('/products');
+    }
 }
 

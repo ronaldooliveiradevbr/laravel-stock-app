@@ -3,6 +3,12 @@
 @section('content')
 <h1>Products in stock</h1>
 
+@if (Session::has('message'))
+  <div class="alert alert-success">
+    {{ Session::get('message') }}
+  </div>    
+@endif
+
 <table class="table">
   <thead>
     <tr>
@@ -19,7 +25,7 @@
       <td>{{ $product->price }}</td>
       <td>{{ $product->quantity }}</td>
       <td>
-        <a href="/{{ $product->id }}">
+        <a href="/products/{{ $product->id }}">
           <span class="glyphicon glyphicon-search" aria-hidden="true">show</span>
         </a>
       </td>

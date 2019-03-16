@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-<form method="post" action=".">
+<form method="post" action="/products">
   {{ csrf_field() }}
 
   <div class="form-group">
