@@ -56,9 +56,17 @@ class ProductsTest extends TestCase
         $data = factory(Product::class)->make()->toArray();
 
 	$this->post('/products', $data)
-            ->assertStatus(302)
-            ->assertSessionHas('message', "Product {$data['name']} added successfuly");
+            ->assertRedirect('/products');
         $this->assertDatabaseHas('products', $data);
+    }
+
+    public function test_user_can_delete_product()
+    {
+        $deleted = factory(Product::class)->create();
+
+	$this->delete('/products/' . $deleted->id)
+            ->assertRedirect('/products');
+	$this->assertDatabaseMissing('products', $deleted->toArray());
     }
 }
 

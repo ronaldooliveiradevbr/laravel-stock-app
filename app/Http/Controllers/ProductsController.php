@@ -35,5 +35,14 @@ class ProductsController extends Controller
 
         return redirect('/products');
     }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        \Session::flash('message', 'Product deleted successfuly');
+
+        return redirect('/products');
+    }
 }
 
