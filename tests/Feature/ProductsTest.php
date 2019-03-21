@@ -42,6 +42,7 @@ class ProductsTest extends TestCase
             '<textarea name="description',
             '<input type="text" name="price',
             '<input type="text" name="quantity',
+            '<input type="text" name="size',
             '<button type="submit',
 	];
 

@@ -20,6 +20,10 @@
     <label for="quantity">Quantity:</label>
     <input type="text" name="quantity" class="form-control">
   </div>
+  <div class="form-group">
+    <label for="size">Size:</label>
+    <input type="text" name="size" class="form-control">
+  </div>
     
   <button type="submit" class="btn btn-primary">Save</button>
 </form>

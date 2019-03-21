@@ -24,6 +24,7 @@
 	  <th>Name</th>
 	  <th>Price</th>
 	  <th>Quantity</th>
+	  <th>Size</th>
 	  <th>Actions</th>
 	</tr>
       </thead>
@@ -33,6 +34,7 @@
           <td>{{ $product->name }}</td>
           <td>{{ $product->price }}</td>
           <td>{{ $product->quantity }}</td>
+          <td>{{ $product->size }}</td>
           <td>
             <a href="/products/{{ $product->id }}" class="btn btn-link">show</a>
             <a href="/products/{{ $product->id }}/edit" class="btn btn-link">edit</a>
