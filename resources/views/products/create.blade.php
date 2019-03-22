@@ -2,7 +2,7 @@
 
 @section('content')
 <form method="post" action="/products">
-  {{ csrf_field() }}
+  @csrf
 
   <div class="form-group">
     <label for="name">Name:</label>
@@ -25,6 +25,8 @@
     <input type="text" name="size" class="form-control">
   </div>
     
-  <button type="submit" class="btn btn-primary">Save</button>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
 </form>
 @endsection
