@@ -10,6 +10,13 @@ class ProductsTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutExceptionHandling();
+    }
+
     public function test_a_user_should_see_a_list_of_products()
     {
         factory(Product::class)->create(['name' => 'Smart TV']);
@@ -59,6 +66,27 @@ class ProductsTest extends TestCase
 	$this->post('/products', $data)
             ->assertRedirect('/products');
         $this->assertDatabaseHas('products', $data);
+    }
+
+    public function test_user_can_see_edit_form()
+    {
+        $formFields = [
+            '<input type="hidden" name="_token',
+            '<input type="text" name="name',
+            '<textarea name="description',
+            '<input type="text" name="price',
+            '<input type="text" name="quantity',
+            '<input type="text" name="size',
+            '<button type="submit',
+	];
+
+		$product = factory(Product::class)->create();
+
+        $this->get('/products/'.$product->id.'/edit')
+            ->assertStatus(200)
+            ->assertViewIs('products.edit')
+            ->assertViewHas('product', $product)
+            ->assertSeeInOrder($formFields);
     }
 
     public function test_user_can_delete_product()

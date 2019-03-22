@@ -28,12 +28,17 @@ class ProductsController extends Controller
 
 	Product::create($data);
 
-	$request->session()->flash(
+	\Session::flash(
             'message',
 	    "Product {$data['name']} added successfuly"
         );
 
         return redirect('/products');
+    }
+
+    public function edit(Product $product)
+    {
+        return view('products.edit')->with('product', $product);
     }
 
     public function destroy(Product $product)
