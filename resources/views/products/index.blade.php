@@ -36,11 +36,11 @@
           <td>{{ $product->quantity }}</td>
           <td>{{ $product->size }}</td>
           <td>
-            <a href="/products/{{ $product->id }}" class="btn btn-link">show</a>
-            <a href="/products/{{ $product->id }}/edit" class="btn btn-link">edit</a>
 	    <form method="post" action="/products/{{ $product->id }}" class="form-inline">
               @csrf
               @method('DELETE')
+              <a href="/products/{{ $product->id }}" class="btn btn-link">show</a>
+              <a href="/products/{{ $product->id }}/edit" class="btn btn-link">edit</a>
               <button type="submit" class="btn btn-link">delete</button>
             </form>
           </td>
