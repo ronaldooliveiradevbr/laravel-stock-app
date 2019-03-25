@@ -3,7 +3,8 @@
 @section('content')
 <h1>Edit {{ $product->name }}</h1>
 
-<form method="post" action="#">
+<form method="post" action="/products/{{ $product->id }}">
+  @method('PUT')
   @csrf
 
   <div class="form-group">

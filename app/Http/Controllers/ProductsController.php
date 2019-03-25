@@ -41,6 +41,15 @@ class ProductsController extends Controller
         return view('products.edit')->with('product', $product);
     }
 
+    public function update(Request $request, Product $product)
+    {
+        $product->update($request->all());
+
+	\Session::flash('message', $product->name . ' edited successfuly!');
+	
+	return redirect('/products'); 
+    }
+
     public function destroy(Product $product)
     {
         $product->delete();

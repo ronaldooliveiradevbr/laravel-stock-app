@@ -89,6 +89,17 @@ class ProductsTest extends TestCase
             ->assertSeeInOrder($formFields);
     }
 
+    public function test_user_can_edit_a_product()
+    {
+        $product = factory(Product::class)->create();
+        $formData = factory(Product::class)->make()->toArray();
+
+        $this->put('/products/'.$product->id, $formData)
+            ->assertRedirect('/products')
+            ->assertSessionHas('message', $formData['name'] . ' edited successfuly!');
+	$this->assertDatabaseHas('products', $formData);
+    }
+
     public function test_user_can_delete_product()
     {
         $deleted = factory(Product::class)->create();
