@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Stock\Core\Product;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductsTest extends TestCase
@@ -66,6 +67,13 @@ class ProductsTest extends TestCase
 	$this->post('/products', $data)
             ->assertRedirect('/products');
         $this->assertDatabaseHas('products', $data);
+    }
+
+    public function test_user_cannot_add_product_with_invalid_data()
+    {
+	$this->expectException(ValidationException::class);
+
+        $this->post('/products', []);
     }
 
     public function test_user_can_see_edit_form()

@@ -4,6 +4,7 @@ namespace Stock\Http\Controllers;
 
 use Stock\Core\Product;
 use Illuminate\Http\Request;
+use Stock\Http\Requests\CreateProduct;
 
 class ProductsController extends Controller
 {
@@ -22,16 +23,11 @@ class ProductsController extends Controller
         return view('products.create')->with('product', new Product());
     }
 
-    public function store(Request $request)
+    public function store(CreateProduct $request)
     {
-	$data = $request->all();
+	Product::create($request->all());
 
-	Product::create($data);
-
-	\Session::flash(
-            'message',
-	    "Product {$data['name']} added successfuly"
-        );
+	$request->session()->flash('message', 'Product added successfuly');
 
         return redirect('/products');
     }
