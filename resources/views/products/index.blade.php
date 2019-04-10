@@ -6,7 +6,7 @@
 @if (Session::has('message'))
   <div class="alert alert-success">
     {{ Session::get('message') }}
-  </div>    
+  </div>
 @endif
 
 <div class="row">
@@ -20,13 +20,13 @@
   <div class="col-md-12">
     <table class="table">
       <thead>
-	<tr>
-	  <th>Name</th>
-	  <th>Price</th>
-	  <th>Quantity</th>
-	  <th>Size</th>
-	  <th>Actions</th>
-	</tr>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Size</th>
+          <th>Actions</th>
+        </tr>
       </thead>
       <tbody>
       @foreach ($products as $product)
@@ -36,7 +36,7 @@
           <td>{{ $product->quantity }}</td>
           <td>{{ $product->size }}</td>
           <td>
-	    <form method="post" action="/products/{{ $product->id }}" class="form-inline">
+            <form method="post" action="/products/{{ $product->id }}" class="form-inline">
               @csrf
               @method('DELETE')
               <a href="/products/{{ $product->id }}" class="btn btn-link">show</a>
@@ -44,11 +44,10 @@
               <button type="submit" class="btn btn-link">delete</button>
             </form>
           </td>
-	</tr>
+        </tr>
       @endforeach
       </tbody>
     </table>
   </div>
 </div>
 @endsection
-

@@ -11,4 +11,3 @@ $factory->define(Stock\Core\Product::class, function (Faker $faker) {
         'size' => $faker->word,
     ];
 });
-

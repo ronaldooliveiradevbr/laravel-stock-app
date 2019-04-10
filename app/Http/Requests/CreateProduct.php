@@ -25,11 +25,10 @@ class CreateProduct extends FormRequest
     {
         return [
             'name' => 'required',
-	    'description' => 'required',
-	    'price' => 'required',
+            'description' => 'required',
+            'price' => 'required',
             'quantity' => 'required',
             'size' => 'required',
         ];
     }
 }
-

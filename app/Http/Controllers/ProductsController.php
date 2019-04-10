@@ -13,8 +13,8 @@ class ProductsController extends Controller
         return view('products.index')->with('products', Product::all());
     }
 
-    public function show(Product $product) 
-    {                         
+    public function show(Product $product)
+    {
         return view('products.show')->with('product', $product);
     }
 
@@ -25,9 +25,9 @@ class ProductsController extends Controller
 
     public function store(CreateProduct $request)
     {
-	Product::create($request->all());
+        Product::create($request->all());
 
-	$request->session()->flash('message', 'Product added successfuly');
+        $request->session()->flash('message', 'Product added successfuly');
 
         return redirect('/products');
     }
@@ -41,9 +41,9 @@ class ProductsController extends Controller
     {
         $product->update($request->all());
 
-	\Session::flash('message', $product->name . ' edited successfuly!');
-	
-	return redirect('/products'); 
+        \Session::flash('message', $product->name . ' edited successfuly!');
+
+        return redirect('/products');
     }
 
     public function destroy(Product $product)
@@ -55,4 +55,3 @@ class ProductsController extends Controller
         return redirect('/products');
     }
 }
-

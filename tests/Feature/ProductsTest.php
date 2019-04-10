@@ -52,26 +52,26 @@ class ProductsTest extends TestCase
             '<input type="text" name="quantity',
             '<input type="text" name="size',
             '<button type="submit',
-	];
+        ];
 
         $this->get('/products/create')
             ->assertStatus(200)
             ->assertViewIs('products.create')
-	    ->assertSeeInOrder($formFields);
+            ->assertSeeInOrder($formFields);
     }
 
     public function test_a_user_can_add_new_product()
     {
         $data = factory(Product::class)->make()->toArray();
 
-	$this->post('/products', $data)
+        $this->post('/products', $data)
             ->assertRedirect('/products');
         $this->assertDatabaseHas('products', $data);
     }
 
     public function test_user_cannot_add_product_with_invalid_data()
     {
-	$this->expectException(ValidationException::class);
+	    $this->expectException(ValidationException::class);
 
         $this->post('/products', []);
     }
@@ -86,7 +86,7 @@ class ProductsTest extends TestCase
             '<input type="text" name="quantity',
             '<input type="text" name="size',
             '<button type="submit',
-	];
+        ];
 
 		$product = factory(Product::class)->create();
 
@@ -105,16 +105,15 @@ class ProductsTest extends TestCase
         $this->put('/products/'.$product->id, $formData)
             ->assertRedirect('/products')
             ->assertSessionHas('message', $formData['name'] . ' edited successfuly!');
-	$this->assertDatabaseHas('products', $formData);
+        $this->assertDatabaseHas('products', $formData);
     }
 
     public function test_user_can_delete_product()
     {
         $deleted = factory(Product::class)->create();
 
-	$this->delete('/products/' . $deleted->id)
+        $this->delete('/products/' . $deleted->id)
             ->assertRedirect('/products');
-	$this->assertDatabaseMissing('products', $deleted->toArray());
+        $this->assertDatabaseMissing('products', $deleted->toArray());
     }
 }
-
