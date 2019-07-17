@@ -24,7 +24,7 @@ class ProductsTest extends TestCase
         factory(Product::class)->create(['name' => 'Microwave']);
         factory(Product::class)->create(['name' => 'Tablet']);
 
-        $this->get('/products')
+        $this->get(route('products.index'))
             ->assertStatus(200)
             ->assertSee('Products')
             ->assertSee('Smart TV')
@@ -36,7 +36,7 @@ class ProductsTest extends TestCase
     {
         $product = factory('Stock\Core\Product')->create();
 
-        $this->get('/products/1')
+        $this->get(route('products.show', ['id' => 1]))
             ->assertStatus(200)
             ->assertSee($product->name)
             ->assertSee($product->price);
@@ -54,7 +54,7 @@ class ProductsTest extends TestCase
             '<button type="submit',
         ];
 
-        $this->get('/products/create')
+        $this->get(route('products.create'))
             ->assertStatus(200)
             ->assertViewIs('products.create')
             ->assertSeeInOrder($formFields);
@@ -64,7 +64,7 @@ class ProductsTest extends TestCase
     {
         $data = factory(Product::class)->make()->toArray();
 
-        $this->post('/products', $data)
+        $this->post(route('products.store', $data))
             ->assertRedirect('/products');
         $this->assertDatabaseHas('products', $data);
     }
@@ -73,7 +73,7 @@ class ProductsTest extends TestCase
     {
 	    $this->expectException(ValidationException::class);
 
-        $this->post('/products', []);
+        $this->post(route('products.store', []));
     }
 
     public function test_user_can_see_edit_form()
@@ -88,9 +88,9 @@ class ProductsTest extends TestCase
             '<button type="submit',
         ];
 
-		$product = factory(Product::class)->create();
+        $product = factory(Product::class)->create();
 
-        $this->get('/products/'.$product->id.'/edit')
+        $this->get(route('products.edit', ['id' => 1]))
             ->assertStatus(200)
             ->assertViewIs('products.edit')
             ->assertViewHas('product', $product)
@@ -102,7 +102,7 @@ class ProductsTest extends TestCase
         $product = factory(Product::class)->create();
         $formData = factory(Product::class)->make()->toArray();
 
-        $this->put('/products/'.$product->id, $formData)
+        $this->put(route('products.update', ['id' => 1]), $formData)
             ->assertRedirect('/products')
             ->assertSessionHas('message', $formData['name'] . ' edited successfuly!');
         $this->assertDatabaseHas('products', $formData);
@@ -112,7 +112,7 @@ class ProductsTest extends TestCase
     {
         $deleted = factory(Product::class)->create();
 
-        $this->delete('/products/' . $deleted->id)
+        $this->delete(route('products.destroy', ['id' => 1]))
             ->assertRedirect('/products');
         $this->assertDatabaseMissing('products', $deleted->toArray());
     }
